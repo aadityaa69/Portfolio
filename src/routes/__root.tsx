@@ -1,7 +1,5 @@
 import { useEffect, useRef } from "react";
-import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
-
-import appCss from "../styles.css?url";
+import { Link, Outlet, createRootRoute } from "@tanstack/react-router";
 
 function NotFoundComponent() {
   return (
@@ -26,52 +24,17 @@ function NotFoundComponent() {
 }
 
 export const Route = createRootRoute({
-  head: () => ({
-    meta: [
-      { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Aaditya's Portfolio" },
-      { name: "description", content: "Aaditya Yadav — Indie game developer portfolio." },
-      { name: "author", content: "Aaditya Yadav" },
-      { property: "og:title", content: "Aaditya's Portfolio" },
-      { property: "og:description", content: "Indie game developer portfolio." },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-    ],
-    links: [
-      {
-        rel: "icon",
-        type: "image/png",
-        href: "/favicon.png",
-      },
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
-    ],
-  }),
-  shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
 });
 
-function RootShell({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        <CursorFollower />
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  );
-}
-
 function RootComponent() {
-  return <Outlet />;
+  return (
+    <>
+      <CursorFollower />
+      <Outlet />
+    </>
+  );
 }
 
 function CursorFollower() {
